@@ -1,0 +1,86 @@
+extends ./_layout_system
+
+block content
+  body
+    div.wrapper
+      div.sidebar(data-color="user_blue" data-background-color="white" data-image="../vendor/assets/img/sidebar-1.jpg")
+        div.logo
+          a.simple-text.logo-normal(href="/system/home")
+            i.fas.fa-shield-alt.fa-lg &nbsp; SAS
+        .sidebar-wrapper
+          ul.nav
+            li.nav-item
+              a.nav-link(href='./home')
+                i.fas.fa-home
+                p Register/Suspend
+            li.nav-item.active
+              a.nav-link(href='./retrieve')
+                i.far.fa-paper-plane
+                p Send Notification
+      div.main-panel
+        nav(class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top")
+          .container-fluid
+            .navbar-wrapper
+              a.navbar-brand(href='#home') Send notification to students
+            .collapse.navbar-collapse.justify-content-end
+              ul.navbar-nav
+                li.nav-item.dropdown
+                  a#navbarDropdownProfile.nav-link(href='#' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false')
+                    i.fas.fa-user.fa-lg(style="color:#666666")
+                    p.d-lg-none.d-md-block
+                      | Account
+                    text &nbsp; #{username}
+                  .dropdown-menu.dropdown-menu-right.failedLoginAttempt-menu(aria-labelledby='navbarDropdownProfile')
+                    a.dropdown-item(href='/logout') Log Out
+        .content
+          .container-fluid
+            .row
+              .col-md-12
+                if alert === "success"
+                  .alert.alert-success.animated.fadeInDown
+                    button.close(type="button" aria-hidden="true" data-dismiss="alert")
+                      i.fas.fa-times
+                    span
+                      i.fas.fa-check-circle(style="color:white")
+                      b &nbsp; #{validation_msg}
+                if alert === "danger"
+                  .alert.alert-danger.animated.shake
+                    button.close(type="button" aria-hidden="true" data-dismiss="alert")
+                      i.fas.fa-times
+                    span
+                      i.fas.fa-exclamation-triangle(style="color:white")
+                      b &nbsp; #{validation_msg}
+            .row
+              .col-md-12
+                .card
+                  .card-header.card-header-text.card-header-secondary
+                    .card-text
+                      .card-title Student Accounts
+                    .small(style="color: black") To select, click on student email...
+                  .card-body.autosize
+                    table.table.table-hover
+                      tr
+                        th Students
+                        th Is Suspended?
+                      tbody
+                        each record in accounts_student
+                          tr
+                            td 
+                              a.nav-link(onclick="selectStudent_retrieve(\""+record.email+"\")"  style="color:green; cursor: pointer") #{record.email}
+                            td #{record.suspend}
+              .col-md-12
+                .card
+                  .card-header.card-header-text.card-header-primary
+                    .card-text
+                      .card-title Send Notification 
+                    .small(style="color: black") To add students to receive notifications, click students on the above table...
+                  .card-body.autosize
+                    form.form-group.form-file-upload.form-file-multiple.validate-form(role="form" method="post" action="/system/api/retrievefornotifications")
+                      .form-group
+                        label(for="students_selected_retrieve") Students Registered To You
+                        input.form-control(type="text" id="students_selected_retrieve" name="students_selected_retrieve" value=registered_students)
+                      .form-group
+                        label(for="notification_msg") Notification Message
+                        input.form-control(type="text" id="notification_msg" name="notification_msg")
+                      .form-group
+                        button(type="submit" class="btn btn-user_blue" data-toggle="tooltip" data-placement="top" title="Register") Send Notification!

@@ -1,0 +1,59 @@
+body {
+/*	background-image: url("/images/mainBackground.jpg");
+	background-size: cover;
+	background-repeat: no-repeat;*/
+}
+
+#notification {
+    position:sticky;
+    top:0px;
+    width:100%;
+    z-index:105;
+    text-align:center;
+    font-weight:normal;
+    font-size:14px;
+    font-weight:bold;
+    color:white;
+    background-color:#ff0600;
+    padding:5px;
+}
+
+#notification span.dismiss {
+    border:2px solid #FFF;
+    padding:0 5px;
+    cursor:pointer;
+    float:right;
+    margin-right:10px;
+}
+
+#notification a {
+    color:white;
+    text-decoration:none;
+    font-weight:bold
+}
+
+
+.mainDiv {
+    background-image: url("/images/mainBackground.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.container-login {
+    width: 100%;
+    min-height: 100vh;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+}
+
+.autosize {
+    overflow: auto;
+    max-height: 450px;
+}

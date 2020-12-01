@@ -1,0 +1,37 @@
+extends ./_layout_users
+
+block content
+  div(id="notification" style="display:none")
+    span.dismiss
+      a(title="dismiss this notification") x
+  div(class="limiter mainDiv")
+    div(class="container-login")
+      div(class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-50")
+        ul.nav
+          li.nav-item.active
+            a.nav-link(href='./login') Login
+          li.nav-item.active
+            a.nav-link(href='./register') Register
+        form(class="login100-form validate-form" style="margin-top: 20px;" role="form" autocomplete="off" method='post' action='/register')
+          span(class="login100-form-title p-b-33") Account Registration
+          if alert === "success"
+            .alert.alert-success.animated.fadeInDown(role='alert' id="msgDiv_success" style='display: block') #{ validation_msg }
+          else if alert === "danger"
+            .alert.alert-danger.animated.shake(role='alert' id="msgDiv_danger" style='display: block') #{ validation_msg }
+          else if alert === "warning"
+            .alert.alert-warning.animated.shake(role='alert' id="msgDiv_warning" style='display: block') #{ validation_msg }
+          div(class="wrap-input100 validate-input" data-validate="Valid email is required")
+            input(class="input100" type="text" name="email" placeholder="Enter Email" autocomplete="off" maxlength='30' autofocus)
+            span(class="focus-input100-1")
+            span(class="focus-input100-2")
+          div(class="wrap-input100 rs1 validate-input" data-validate="Password is required")
+            input(class="input100" type="password" name="password" placeholder="Enter Password")
+            span(class="focus-input100-1")
+            span(class="focus-input100-2")
+          div(class="wrap-input100 rs1 validate-input" data-validate="Confirm Password is required")
+            input(class="input100" type="password" name="c_password" placeholder="Confirm Password")
+            span(class="focus-input100-1")
+            span(class="focus-input100-2")
+          div(class="container-login100-form-btn m-t-20")
+            button(class="login100-form-btn") Register
+          a(href="/users/login")
